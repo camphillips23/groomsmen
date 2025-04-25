@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J & C Wedding - Groomsmen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage: #94a293;
+            --cream: #f5f5f0;
+            --charcoal: #333333;
+            --blush: #f7e4e6;
+            --sage-light: #b5c1b4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: var(--sage);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(148, 162, 147, 0.95);
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .navbar-title {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--sage);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--blush);
+        }
+        
+        /* Welcome Section */
+        #welcome {
+            background-color: var(--cream);
+            padding-top: 150px;
+            text-align: center;
+        }
+        
+        .welcome-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        /* Schedule Section */
+        #schedule {
+            background-color: white;
+        }
+        
+        .day {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: var(--cream);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .day:hover {
+            transform: translateY(-5px);
+        }
+        
+        .day-title {
+            color: var(--sage);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--blush);
+            padding-bottom: 10px;
+        }
+        
+        .event {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--sage-light);
+        }
+        
+        .event-time {
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 5px;
+        }
+        
+        .event-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .event-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Attire Section */
+        #attire {
+            background-color: var(--blush);
+            text-align: center;
+        }
+        
+        .attire-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .attire-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .attire-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .attire-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--sage);
+        }
+        
+        .attire-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        /* Venue Section */
+        #venue {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .venue-details {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--cream);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .venue-name {
+            font-size: 1.5rem;
+            color: var(--sage);
+            margin-bottom: 10px;
+        }
+        
+        .venue-address {
+            margin-bottom: 20px;
+        }
+        
+        .map-container {
+            margin-top: 30px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--sage);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-website-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .main-website-link:hover {
+            background-color: white;
+            color: var(--sage);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .navbar-title {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            #welcome {
+                padding-top: 120px;
+            }
+            
+            .welcome-text {
+                font-size: 1rem;
+            }
+            
+            .day {
+                padding: 20px;
+            }
+            
+            .day-title {
+                font-size: 1.5rem;
+            }
+            
+            .event-name {
+                font-size: 1.1rem;
+            }
+            
+            .attire-container {
+                flex-direction: column;
+            }
+            
+            .attire-item {
+                width: 100%;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <h1 class="navbar-title">J & C Wedding</h1>
+        </div>
+    </nav>
+    
+    <!-- Welcome Section -->
+    <section id="welcome" class="visible">
+        <div class="container">
+            <h2 class="section-title animate-fadeIn">Welcome Groomsmen!</h2>
+            <div class="welcome-text animate-fadeIn delay-1">
+                <p>We can't wait to celebrate with you. Refer to this webpage for the wedding weekend schedule.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Schedule Section -->
+    <section id="schedule">
+        <div class="container">
+            <h2 class="section-title">Weekend Schedule</h2>
+            
+            <div class="day animate-fadeIn delay-1">
+                <h3 class="day-title">Friday, May 9th</h3>
+                
+                <div class="event">
+                    <div class="event-time">12:30 PM</div>
+                    <div class="event-name">Rehearsal at Regency Garden</div>
+                    <div class="event-details">Plus Ones: Optional | Attire: Casual</div>
+                </div>
+                
+                <div class="event">
+                    <div class="event-time">5:00 PM</div>
+                    <div class="event-name">Welcome Party at Spokes on Southern in Tempe</div>
+                    <div class="event-details">Plus Ones: Yes | Attire: Casual</div>
+                </div>
+            </div>
+            
+            <div class="day animate-fadeIn delay-2">
+                <h3 class="day-title">Saturday, May 10th</h3>
+                
+                <div class="event">
+                    <div class="event-time">2:30 PM</div>
+                    <div class="event-name">Groomsmen Prep at Regency Garden</div>
+                    <div class="event-details">Guys only | Arrive in suite</div>
+                </div>
+                
+                <div class="event">
+                    <div class="event-time">5:30 PM</div>
+                    <div class="event-name">Ceremony at Regency Garden</div>
+                    <div class="event-details">Groomsmen will walk down aisle and then sit in reserved seat</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Attire Section -->
+    <section id="attire">
+        <div class="container">
+            <h2 class="section-title">Attire Information</h2>
+            
+            <div class="attire-container">
+                <div class="attire-item animate-fadeIn delay-1">
+                    <div class="attire-icon">👔</div>
+                    <h3 class="attire-title">Coat/Pants</h3>
+                    <p>Black</p>
+                </div>
+                
+                <div class="attire-item animate-fadeIn delay-2">
+                    <div class="attire-icon">👕</div>
+                    <h3 class="attire-title">Shirt</h3>
+                    <p>White</p>
+                </div>
+                
+                <div class="attire-item animate-fadeIn delay-3">
+                    <div class="attire-icon">🎀</div>
+                    <h3 class="attire-title">Tie</h3>
+                    <p>Provided</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Venue Section -->
+    <section id="venue">
+        <div class="container">
+            <h2 class="section-title">Venue Information</h2>
+            
+            <div class="venue-details animate-fadeIn">
+                <h3 class="venue-name">Regency Garden</h3>
+                <p class="venue-address">25 N Robson, Mesa, AZ 85201</p>
+                
+                <div class="map-container">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        style="border:0" 
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Regency+Garden+25+N+Robson+Mesa+AZ+85201" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Thank you for being part of our special day!</p>
+            <a href="https://www.zola.com/wedding/jocelyncameron" class="main-website-link" target="_blank">Visit Main Wedding Website</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Scroll animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial check for elements in viewport
+            checkVisibility();
+            
+            // Check on scroll
+            window.addEventListener('scroll', function() {
+                checkVisibility();
+                
+                // Navbar scroll effect
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            function checkVisibility() {
+                const sections = document.querySelectorAll('section:not(.visible)');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
